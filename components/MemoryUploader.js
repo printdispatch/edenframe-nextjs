@@ -24,4 +24,7 @@ export default function MemoryUploader() {
       setSpeaker('');
       setMessage('');
       setEmotionalTone('');
-      setTags
+      setTags('');
+
+    }
+};
