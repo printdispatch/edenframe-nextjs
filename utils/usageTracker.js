@@ -1,1 +1,1 @@
-
+export function trackUsage(messageCount, tokenCount) { console.log(`Messages: ${messageCount}, Tokens: ${tokenCount}`); }

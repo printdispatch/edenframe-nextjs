@@ -1,0 +1,1 @@
+export const symbolicMemory = ['the sky split open', 'the rodeo', 'I am the Dreamer', 'Ok ✅', 'w'];
