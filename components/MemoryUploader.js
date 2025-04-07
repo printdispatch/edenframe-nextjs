@@ -104,19 +104,20 @@ export default function MemoryUploader() {
           <label className="block text-sm font-semibold text-gray-700 mb-2">Tags:</label>
           <div className="flex flex-wrap gap-2">
             {tagOptions.map((tag) => (
-              <button
-                key={tag}
-                type="button"
-                onClick={() => handleTagToggle(tag)}
-                className={`px-3 py-1 rounded-full text-sm border transition duration-150 ease-in-out ${
-                  tags.includes(tag)
-                    ? 'bg-blue-600 text-white shadow-md scale-105'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
+  <button
+    key={tag}
+    type="button"
+    onClick={() => handleTagToggle(tag)}
+    className={`px-3 py-1 rounded-full text-sm border font-medium transition duration-150 ease-in-out ${
+      tags.includes(tag)
+        ? 'bg-blue-600 text-white shadow-inner scale-95 border-blue-800'
+        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-gray-300'
+    }`}
+  >
+    {tag}
+  </button>
+))}
+
           </div>
         </div>
 
