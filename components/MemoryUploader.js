@@ -37,7 +37,7 @@ const handleUpload = async (e) => {
         speaker,
         message,
         emotional_tone: tone,
-        tags: tags.join(', ')
+        tags
       }
     ]);
 
