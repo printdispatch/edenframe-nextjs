@@ -32,12 +32,19 @@ export default function MemoryUploader() {
     <div className="p-4 max-w-2xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Manual Memory Entry</h2>
       <form onSubmit={handleUpload} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Speaker (Dreamer or Lyra)"
-          value={speaker}
-          onChange={(e) => setSpeaker(e.target.value)}
-          className="w-full p-2 border rounded"
+        <div className="flex items-center gap-4 mb-4">
+          <label className="text-sm font-medium">Speaker:</label>
+          <button
+           type="button"
+           onClick={() => setSpeaker(speaker === 'Lyra' ? 'Dreamer' : 'Lyra')}
+           className={`px-3 py-1 rounded border ${
+           speaker === 'Lyra' ? 'bg-purple-600 text-white' : 'bg-gray-200 text-black'
+        }`}
+  >
+    {speaker}
+  </button>
+</div>
+
           required
         />
         <textarea
