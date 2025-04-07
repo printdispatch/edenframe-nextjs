@@ -29,8 +29,9 @@ export default function MemoryUploader() {
     );
   };
 
-  const handleUpload = async (e) => {
-    e.preventDefault();
+const handleUpload = async (e) => {
+  e.preventDefault();
+  try {
     const { data, error } = await supabase.from('conversations').insert([
       {
         speaker,
@@ -39,16 +40,22 @@ export default function MemoryUploader() {
         tags: tags.join(', ')
       }
     ]);
+
     if (error) {
-      console.error(error);
-      setStatus('❌ Failed to upload memory.');
+      console.error('Supabase Error:', error.message);
+      setStatus(`❌ Failed to upload memory: ${error.message}`);
     } else {
       setStatus('✅ Memory uploaded successfully.');
       setMessage('');
       setTone('');
       setTags([]);
     }
-  };
+  } catch (err) {
+    console.error('Unexpected Error:', err);
+    setStatus(`❌ Unexpected error: ${err.message}`);
+  }
+};
+
 
   return (
     <div className="p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border border-purple-100">
