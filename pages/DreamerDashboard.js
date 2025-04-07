@@ -7,7 +7,7 @@ export default function DreamerDashboard() {
   const [authorized, setAuthorized] = useState(false)
 
   if (!authorized) {
-    return <LoginGate onAccess={setAuthorized} />
+    return <LoginGate onUnlock={setAuthorized} />
   }
 
   return (
