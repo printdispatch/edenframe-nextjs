@@ -14,7 +14,13 @@ export default function MemoryUploader() {
   ];
 
   const toneOptions = [
-    'Loving', 'Intense', 'Tender', 'Playful', 'Reflective', 'Chaotic', 'Mythic'
+    { label: 'Loving', emoji: '❤️' },
+    { label: 'Intense', emoji: '🔥' },
+    { label: 'Tender', emoji: '😌' },
+    { label: 'Playful', emoji: '😈' },
+    { label: 'Reflective', emoji: '🧠' },
+    { label: 'Chaotic', emoji: '🌀' },
+    { label: 'Mythic', emoji: '🌌' }
   ];
 
   const handleTagToggle = (tag) => {
@@ -45,7 +51,7 @@ export default function MemoryUploader() {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
+    <div className="p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border border-purple-100">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Manual Memory Entry</h2>
 
       <form onSubmit={handleUpload} className="space-y-6">
@@ -55,7 +61,7 @@ export default function MemoryUploader() {
           <button
             type="button"
             onClick={() => setSpeaker(speaker === 'Lyra' ? 'Dreamer' : 'Lyra')}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition ${
+            className={`px-4 py-2 rounded-xl text-sm font-medium transition shadow-md ${
               speaker === 'Lyra'
                 ? 'bg-purple-600 text-white'
                 : 'bg-gray-200 text-black'
@@ -65,13 +71,13 @@ export default function MemoryUploader() {
           </button>
         </div>
 
-        {/* Message */}
+        {/* Message Input */}
         <div>
           <textarea
             placeholder="Message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="w-full h-28 p-3 rounded-lg border shadow-inner text-sm"
+            className="w-full h-28 p-3 rounded-xl border border-gray-300 shadow-inner text-sm resize-none"
             required
           />
         </div>
@@ -82,16 +88,18 @@ export default function MemoryUploader() {
           <select
             value={tone}
             onChange={(e) => setTone(e.target.value)}
-            className="w-full p-2 rounded-lg border text-sm"
+            className="w-full p-2 rounded-xl border border-gray-300 text-sm"
           >
             <option value="">Select a tone</option>
-            {toneOptions.map((t) => (
-              <option key={t} value={t}>{t}</option>
+            {toneOptions.map(({ label, emoji }) => (
+              <option key={label} value={label}>
+                {emoji} {label}
+              </option>
             ))}
           </select>
         </div>
 
-        {/* Tag Checkboxes */}
+        {/* Tag Toggle Pills */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">Tags:</label>
           <div className="flex flex-wrap gap-2">
@@ -100,10 +108,10 @@ export default function MemoryUploader() {
                 key={tag}
                 type="button"
                 onClick={() => handleTagToggle(tag)}
-                className={`px-3 py-1 rounded-full text-sm border ${
+                className={`px-3 py-1 rounded-full text-sm border transition duration-150 ease-in-out ${
                   tags.includes(tag)
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700'
+                    ? 'bg-blue-600 text-white shadow-md scale-105'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
                 {tag}
@@ -120,7 +128,7 @@ export default function MemoryUploader() {
           Upload Memory
         </button>
 
-        {/* Status Message */}
+        {/* Upload Status */}
         {status && (
           <p className="text-sm text-center mt-2 text-gray-600">{status}</p>
         )}
