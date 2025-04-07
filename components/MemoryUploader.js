@@ -45,7 +45,6 @@ export default function MemoryUploader() {
   </button>
 </div>
 
-          required
         />
         <textarea
           placeholder="Message"
