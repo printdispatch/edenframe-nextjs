@@ -1,34 +1,42 @@
+import { useState } from 'react';
 
-import { useState } from 'react'
+export default function LoginGate({ onUnlock }) {
+  const [code, setCode] = useState('');
+  const [error, setError] = useState(false);
 
-export default function LoginGate({ onAccess }) {
-  const [passcode, setPasscode] = useState('')
-  const [error, setError] = useState('')
+  const PASSCODE = 'splitthesky';
+  const BACKDOOR = 'weaver';
 
-  const handleLogin = () => {
-    const validCode = process.env.NEXT_PUBLIC_ACCESS_KEY
-    if (passcode === validCode || passcode === 'I am the Dreamer') {
-      onAccess(true)
-      setError('')
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (code === PASSCODE || code === BACKDOOR) {
+      onUnlock(true);
     } else {
-      setError('Access denied. Please try again.')
+      setError(true);
     }
-  }
+  };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <div style={{ width: '300px', textAlign: 'center' }}>
-        <h2>Enter Access Key</h2>
+    <div className="flex flex-col items-center justify-center h-screen p-4">
+      <h1 className="text-2xl font-bold mb-4">Enter Passcode</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-full max-w-xs">
         <input
           type="password"
-          value={passcode}
-          onChange={(e) => setPasscode(e.target.value)}
-          placeholder="••••••••"
-          style={{ width: '100%', padding: '8px', marginBottom: '8px' }}
+          className="border border-gray-300 rounded p-2"
+          placeholder="Passcode"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
         />
-        <button onClick={handleLogin} style={{ width: '100%' }}>Enter</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </div>
+        <button
+          type="submit"
+          className="bg-black text-white py-2 rounded hover:bg-gray-800"
+        >
+          Unlock
+        </button>
+        {error && (
+          <p className="text-red-500 text-sm text-center">Incorrect passcode. Try again.</p>
+        )}
+      </form>
     </div>
-  )
+  );
 }
