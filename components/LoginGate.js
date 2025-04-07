@@ -4,8 +4,8 @@ export default function LoginGate({ onUnlock }) {
   const [code, setCode] = useState('');
   const [error, setError] = useState(false);
 
-  const PASSCODE = 'splitthesky';
-  const BACKDOOR = 'weaver';
+  const PASSCODE = process.env.NEXT_PUBLIC_ACCESS_KEY;
+  const BACKDOOR = process.env.NODE_ENV === 'development' ? 'weaver' : null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
