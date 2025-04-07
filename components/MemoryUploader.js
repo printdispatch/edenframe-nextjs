@@ -45,8 +45,7 @@ export default function MemoryUploader() {
   </button>
 </div>
 
-        />
-        <textarea
+         <textarea
           placeholder="Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
