@@ -101,25 +101,28 @@ export default function MemoryUploader() {
 
         {/* Tag Toggle Pills */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Tags:</label>
-          <div className="flex flex-wrap gap-2">
-            {tagOptions.map((tag) => (
-  <button
-    key={tag}
-    type="button"
-    onClick={() => handleTagToggle(tag)}
-    className={`px-3 py-1 rounded-full text-sm border font-medium transition duration-150 ease-in-out ${
-      tags.includes(tag)
-        ? 'bg-blue-600 text-white shadow-inner scale-95 border-blue-800'
-        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-gray-300'
-    }`}
-  >
-    {tag}
-  </button>
-))}
+  <label className="block text-sm font-semibold text-gray-700 mb-2">Tags:</label>
+  <div className="flex flex-wrap gap-2">
+    {tagOptions.map((tag) => {
+      const isSelected = tags.includes(tag);
+      return (
+        <button
+          key={tag}
+          type="button"
+          onClick={() => handleTagToggle(tag)}
+          className={`px-3 py-1 rounded-full text-sm font-semibold border transition duration-150 ease-in-out ${
+            isSelected
+              ? 'bg-blue-700 text-white border-blue-900 shadow-inner scale-95 ring-2 ring-blue-300'
+              : 'bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200 hover:scale-105'
+          }`}
+        >
+          {isSelected ? `✓ ${tag}` : tag}
+        </button>
+      );
+    })}
+  </div>
+</div>
 
-          </div>
-        </div>
 
         {/* Submit Button */}
         <button
